@@ -1,0 +1,80 @@
+Ahmed Abdalmaksoud
+(200304665)
+
+Design Overview
+------------------
+
+My code is separataed into three files.
+
+(1) myshell.h
+
+Include functions prototypes and the declaration of the struct command.
+
+(2) myshell.cpp
+
+Implementations of the functions that are present in myshell.h
+
+(3) main.cpp
+
+Include the main function and checking for the correct number of arguments 
+and call either interactive or batch depending on the user input.
+
+I used struct oneCommand to represent a command. With two memeber variables
+(1) unparsed (represents a command where the name and options not separated)
+(2) cmd (an array where cmd[0] is the command name and cmd[1] .... cmd[9] includes command options and file destinations, ... etc)
+(3) I restricted the command options to a maximum of 10 (for simplicity)
+(4) Also the user can't have more than 100 commands on the same line (for simplicity)
+
+
+b.  Complete specification:
+
+There is one function (readLine) that reads the line from the user or from the file.
+
+For the batch mode: readLine will keep readings input (512) characters at a time until finished 
+all the file.
+
+For the interactive mode: keep taking input until the user inputs quit and also called processLine
+for each user input.
+
+Handling the command
+---------------------
+
+Step 1: I first separate all commands (unparsed), getting all commands and using semicolon as a separator
+(or a singal) that signals an end of a command and beginning of another command.
+
+Step 2: After getting the unparsed command, I then separate the command name and the options,file destinations, etc.
+and I do this for all unparsed commanads that I got from Step1
+
+Step 3: I then call execvp to handle the commands, and if the user input quit. T print Exiting ... and between each dots 
+there is a second delay, just to make it look cool !!, if the execvp fails then it must either by quit or invalid command.
+
+** If we are running interactive Mode, I wait in the Parent Process for the Child Process to Finish **
+
+** If we are running batch Mode, I do not wait in the Parent Process (Parallel Processing & intermixed Results) **
+
+** I call execvp in the Child Process ** 
+
+Step 4: readLine from the user (interactice Mode) or readLine from file (Batch Mode) and go to Step 1 and repeat the Process
+
+c.  A list of any features that you have implemented according to Grading Scheme (1-6), or what you have not implemented.
+
+(1) Head documentation and line comments are successfuly presented
+
+(2) Perfrom single command input and output done successfully
+
+(3) Many commands can run in one line sequentially done successfully
+
+(4) Reading batch file operating correctly done successfully
+
+(5) Many commands can run in one line simultaneoulsy is done succesfully
+
+(6) My make file do the linking and created myshell (executable file) also can do cleaning
+(removing object files) and can also run valgrind . 
+
+
+
+** My code will not break under any circumstances **
+** I accounted for all possible bugs and errors** **Robust Code**
+
+
+

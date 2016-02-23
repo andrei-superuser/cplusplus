@@ -1,0 +1,2 @@
+mkdir dirname; ls -al; pwd; np;ps;
+date;quit
